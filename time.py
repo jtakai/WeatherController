@@ -148,7 +148,7 @@ def GetTime():
 
  
 def main():
-    print("\n--> Run Starting v28")
+    print("\n--> Run Starting v30")
 
 #    if len(sys.argv) != 2:
 #        exit("Usage: {} LOCATION".format(sys.argv[0]))
