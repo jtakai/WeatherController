@@ -18,6 +18,11 @@ def InitSteppers():
     for i in range(200):
         kit.stepper1.onestep(style=stepper.MICROSTEP)
 
+    # Initialise the first hat on the default address
+#    kit1 = MotorKit()
+    # Initialise the second hat on a different address
+#    kit2 = MotorKit(address=0x61)
+
     return()
 
 def InitServos():
