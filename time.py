@@ -9,6 +9,16 @@ import adafruit_pca9685
 from datetime import datetime
 from adafruit_servokit import ServoKit
 
+def InitSteppers():
+    from adafruit_motorkit import MotorKit
+    from adafruit_motor import stepper
+    kit = MotorKit()
+    kit.stepper1.onestep()
+    kit.stepper1.onestep(direction=stepper.BACKWARD, style=stepper.DOUBLE)
+    for i in range(200):
+        kit.stepper1.onestep(style=stepper.MICROSTEP)
+
+    return()
 
 def InitServos():
     print("\n--> Initialize Servos")
@@ -148,7 +158,7 @@ def GetTime():
 
  
 def main():
-    print("\n--> Run Starting v30")
+    print("\n--> Run Starting v31")
 
 #    if len(sys.argv) != 2:
 #        exit("Usage: {} LOCATION".format(sys.argv[0]))
@@ -156,6 +166,7 @@ def main():
 
 
     #InitServos() #Initialize Servo Controller
+    #InitSteppers() #Initialize Servo Controller
     #TestServos() #Reset Servos
     
     InitWeather() #Fetch Current Weather
