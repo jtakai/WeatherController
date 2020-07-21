@@ -1,0 +1,5 @@
+
+
+TEMPMAX = 100.0
+TEMPMIN = 40.0
+
