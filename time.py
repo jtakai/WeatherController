@@ -12,6 +12,7 @@ from adafruit_servokit import ServoKit
 def InitSteppers():
     from adafruit_motorkit import MotorKit
     from adafruit_motor import stepper
+    
     kit = MotorKit()
     kit.stepper1.onestep()
     kit.stepper1.onestep(direction=stepper.BACKWARD, style=stepper.DOUBLE)
@@ -58,7 +59,6 @@ def InitServos():
     time.sleep(0.25)
     kit.servo[12].angle = 0
     time.sleep(0.25)
-
     
     kit.continuous_servo[4].throttle = 0
 
@@ -112,7 +112,48 @@ def InitWeather():
     api_key = get_api_key()
     weather = get_weather(api_key, location)
     
-    print("** <",weather['main']['temp'], ">")
+    # Pull Temp <temp> for Display
+    temp = weather['main']['temp']
+    print("** temp <",temp, ">")
+    
+    # Pull Sun Travel <range> for Arm
+    # This calculates full range of 100% arm travel based on day's sun exposure
+    #
+    print("** Sunrise <",weather['sys']['sunrise'], ">")
+    print("** Sunset <",weather['sys']['sunset'], ">")
+    diff = weather['sys']['sunset'] - weather['sys']['sunrise']
+    print("** Diff <",diff,">")
+    range = diff / 3600.0
+    print("** range <",range,">")
+
+    print("<-------------->")
+
+    rawTime = weather['dt']
+    print("** Time <",rawTime, ">")
+
+    xTime = rawTime - weather['sys']['sunrise']
+    print("** xTime <",xTime, ">")
+
+    # where are we in the percentage of the day?
+    percentTime = ( xTime / diff )
+    print("** percentTime <",percentTime, ">")
+
+    #correctPosition establishes the range position between 0->[maxRange]] degrees
+    maxRange = 180.0
+    correctPosition = percentTime * maxRange
+    
+    print("** correctPosition <",correctPosition, ">")
+
+    # lTime = localtime()
+    # print("** localtime <",lTime, ">")
+
+    # s = time.gmtime(0)
+    # print("** Timezone <",s, ">")
+    print(" ")
+
+    print("<-------------->")
+
+    # Full Weather Data Structure
     print("** <",weather, ">")
     #TASK: Need to return intelligent/formatted weather data for position modules
 
@@ -163,12 +204,11 @@ def GetTime():
 
  
 def main():
-    print("\n--> Run Starting v31")
+    print("\n--> Run Starting v32")
 
 #    if len(sys.argv) != 2:
 #        exit("Usage: {} LOCATION".format(sys.argv[0]))
 #    location = sys.argv[1]
-
 
     #InitServos() #Initialize Servo Controller
     #InitSteppers() #Initialize Servo Controller
