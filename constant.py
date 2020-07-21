@@ -3,3 +3,6 @@
 TEMPMAX = 100.0
 TEMPMIN = 40.0
 
+ARM_MAX_RANGE = 180.0
+
+CITY = "Hermosa+Beach"

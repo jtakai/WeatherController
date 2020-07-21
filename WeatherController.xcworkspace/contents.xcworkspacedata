@@ -10,4 +10,7 @@
    <FileRef
       location = "group:secrets.py">
    </FileRef>
+   <FileRef
+      location = "group:constant.py">
+   </FileRef>
 </Workspace>

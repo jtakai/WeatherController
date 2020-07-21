@@ -5,6 +5,7 @@ import time
 import board
 import busio
 import adafruit_pca9685
+import constant
 
 from datetime import datetime
 from adafruit_servokit import ServoKit
@@ -106,43 +107,54 @@ def get_weather(api_key, location):
 
 def InitWeather():
     print("\n--> Initialize and Read Current Weather")
-    location = "Hermosa+Beach"
+    location = constant.CITY
 
     #Get the API Key for openweathermap.org
     api_key = get_api_key()
     weather = get_weather(api_key, location)
     
+    print("<-----Find Temp Position--------->")
+
     # Pull Temp <temp> for Display
-    temp = weather['main']['temp']
-    print("** temp <",temp, ">")
+    tempMin = constant.TEMPMIN
+    tempMax = constant.TEMPMAX
+    tempDiff = tempMax - tempMin
     
+    currentTemp = weather['main']['temp']
+    #print("** temp <",currentTemp, ">")
+    
+    xTemp = currentTemp - tempMin
+    percentTemp = ( xTemp / tempDiff ) * 100.0
+    print("** percentTemp <",percentTemp, "%>")
+    print("<-------------->")
+
     # Pull Sun Travel <range> for Arm
     # This calculates full range of 100% arm travel based on day's sun exposure
     #
-    print("** Sunrise <",weather['sys']['sunrise'], ">")
-    print("** Sunset <",weather['sys']['sunset'], ">")
-    diff = weather['sys']['sunset'] - weather['sys']['sunrise']
-    print("** Diff <",diff,">")
-    range = diff / 3600.0
-    print("** range <",range,">")
+    print("<-----Find Time Position--------->")
 
-    print("<-------------->")
+    #print("** Sunrise <",weather['sys']['sunrise'], ">")
+    #print("** Sunset <",weather['sys']['sunset'], ">")
+    timeDiff = weather['sys']['sunset'] - weather['sys']['sunrise']
+    #print("** timeDiff <",timeDiff,">")
+    #range = timeDiff / 3600.0
+    #print("** range <",range,">")
 
     rawTime = weather['dt']
-    print("** Time <",rawTime, ">")
+    #print("** Time <",rawTime, ">")
 
     xTime = rawTime - weather['sys']['sunrise']
-    print("** xTime <",xTime, ">")
+    #print("** xTime <",xTime, ">")
 
     # where are we in the percentage of the day?
-    percentTime = ( xTime / diff )
-    print("** percentTime <",percentTime, ">")
+    percentTime = ( xTime / timeDiff )
+    #print("** percentTime <",percentTime, ">")
 
     #correctPosition establishes the range position between 0->[maxRange]] degrees
-    maxRange = 180.0
+    maxRange = constant.ARM_MAX_RANGE # currently set to 180 degrees
     correctPosition = percentTime * maxRange
     
-    print("** correctPosition <",correctPosition, ">")
+    print("** correctPosition <",correctPosition, " degrees>")
 
     # lTime = localtime()
     # print("** localtime <",lTime, ">")
