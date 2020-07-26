@@ -6,11 +6,25 @@ import board
 import busio
 import adafruit_pca9685
 import constant
+import pygame
+import os
+import asyncio
 
 from datetime import datetime
 from adafruit_servokit import ServoKit
 from adafruit_motorkit import MotorKit
 from adafruit_motor import stepper
+
+def InitMusic():
+#    subprocess.Popen("play /home/pi/WeatherController/Carnival3.wav")
+#    pygame.mixer.init()
+#    pygame.mixer.music.load("Carnival3.wav")
+#    pygame.mixer.music.play()
+#    while pygame.mixer.music.get_busy() == True:
+#        continue
+    os.system("play /home/pi/WeatherController/Carnival3.wav &")
+
+
 
 def InitSteppers():
     print("\n--> Initialize Steppers")
@@ -272,17 +286,20 @@ def GetTime():
 
 
 def main():
-    print("\n--> Run Starting v33")
+    print("\n--> Run Starting v35")
     
     #    if len(sys.argv) != 2:
     #        exit("Usage: {} LOCATION".format(sys.argv[0]))
     #    location = sys.argv[1]
-    
+    print("\n--> Playing Music")
+#    asyncio.run(InitMusic())
+
+    InitMusic()
     #SmallInitServos() #Initialize Servo Controller
-    InitSteppers() #Initialize Servo Controller
-    InitServos() #Initialize Servo Controller
+    # ---> InitSteppers() #Initialize Servo Controller
+    # ---> InitServos() #Initialize Servo Controller
     #TestServos() #Reset Servos
-    InitSteppers2() #Initialize Servo Controller
+    # ---> InitSteppers2() #Initialize Servo Controller
 
     #InitWeather() #Fetch Current Weather
     
