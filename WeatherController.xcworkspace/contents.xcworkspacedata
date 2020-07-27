@@ -13,4 +13,34 @@
    <FileRef
       location = "group:constant.py">
    </FileRef>
+   <Group
+      location = "container:"
+      name = "Test Scripts">
+      <FileRef
+         location = "group:bump.py">
+      </FileRef>
+      <FileRef
+         location = "group:bump">
+      </FileRef>
+      <FileRef
+         location = "group:Run.sh">
+      </FileRef>
+      <FileRef
+         location = "group:testStepper.py">
+      </FileRef>
+   </Group>
+   <Group
+      location = "container:"
+      name = "Audio">
+      <FileRef
+         location = "group:Carnival3.wav">
+      </FileRef>
+   </Group>
+   <Group
+      location = "container:"
+      name = "Support Files">
+      <FileRef
+         location = "group:crontab.txt">
+      </FileRef>
+   </Group>
 </Workspace>
