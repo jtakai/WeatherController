@@ -5,13 +5,10 @@
       location = "group:time.py">
    </FileRef>
    <FileRef
-      location = "group:config.ini">
+      location = "group:servos.py">
    </FileRef>
    <FileRef
-      location = "group:secrets.py">
-   </FileRef>
-   <FileRef
-      location = "group:constant.py">
+      location = "group:steppers.py">
    </FileRef>
    <Group
       location = "container:"
@@ -39,6 +36,15 @@
    <Group
       location = "container:"
       name = "Support Files">
+      <FileRef
+         location = "group:secrets.py">
+      </FileRef>
+      <FileRef
+         location = "group:constant.py">
+      </FileRef>
+      <FileRef
+         location = "group:config.ini">
+      </FileRef>
       <FileRef
          location = "group:crontab.txt">
       </FileRef>

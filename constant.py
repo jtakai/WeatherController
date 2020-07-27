@@ -1,5 +1,8 @@
 
 
+TRUE = 1
+FALSE = 0
+
 TEMPMAX = 100.0
 TEMPMIN = 40.0
 

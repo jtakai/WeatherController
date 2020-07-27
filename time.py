@@ -4,123 +4,13 @@ import sys
 import time
 import board
 import busio
-import adafruit_pca9685
 import constant
-import pygame
 import os
 import asyncio
 
+from steppers import ClearSteppers
+from servos import InitServos
 from datetime import datetime
-from adafruit_servokit import ServoKit
-from adafruit_motorkit import MotorKit
-from adafruit_motor import stepper
-
-def InitMusic():
-    #    subprocess.Popen("play /home/pi/WeatherController/Carnival3.wav")
-    #    pygame.mixer.init()
-    #    pygame.mixer.music.load("Carnival3.wav")
-    #    pygame.mixer.music.play()
-    #    while pygame.mixer.music.get_busy() == True:
-    #        continue
-    os.system("play /home/pi/WeatherController/Carnival3.wav &")
-
-
-def ClearSteppers():
-    print("\n--> Initialize Steppers")
-    kit = MotorKit()
-    kit1 = MotorKit(address=0x61)
-        
-    for i in range(200):
-        kit.stepper1.onestep(direction=stepper.FORWARD, style=stepper.SINGLE)
-        kit1.stepper1.onestep(direction=stepper.FORWARD, style=stepper.SINGLE)
-        kit1.stepper2.onestep(direction=stepper.FORWARD, style=stepper.SINGLE)
-        time.sleep(0.01)
-
-    for i in range(200):
-        kit.stepper1.onestep(direction=stepper.BACKWARD, style=stepper.SINGLE)
-        kit1.stepper1.onestep(direction=stepper.BACKWARD, style=stepper.SINGLE)
-        kit1.stepper2.onestep(direction=stepper.BACKWARD, style=stepper.SINGLE)
-        time.sleep(0.01)
-
-    kit.stepper1.release()
-    kit1.stepper1.release()
-    kit1.stepper2.release()
-
-    return()
-    
-def InitServos():
-    print("\n--> Initialize Servos")
-    from adafruit_servokit import ServoKit
-    
-    kit = ServoKit(address=0x44, channels=16)
-    
-    kit.servo[8].angle = 180
-    kit.continuous_servo[12].throttle = 1
-    time.sleep(0.25)
-    kit.continuous_servo[12].throttle = -1
-    time.sleep(0.25)
-    kit.servo[8].angle = 0
-    kit.continuous_servo[12].throttle = -0.1
-    
-    #kit.servo[0].set_pulse_width_range(1000, 2000)
-    #kit.servo[0].actuation_range = 180
-        
-    print("\n--> Test Servos")
-    # Test ServoKit
-    kit.servo[0].angle = 180
-    time.sleep(0.25)
-    kit.servo[8].angle = 180
-    time.sleep(0.25)
-    kit.servo[4].angle = 180
-    time.sleep(0.25)
-    kit.servo[0].angle = 0
-    time.sleep(0.25)
-    kit.servo[8].angle = 0
-    time.sleep(0.25)
-    kit.servo[4].angle = 0
-    time.sleep(0.25)
-        
-    # Test Continuous Servo
-    kit.continuous_servo[12].throttle = 0
-    kit.continuous_servo[12].throttle = 1
-    time.sleep(0.25)
-    kit.continuous_servo[12].throttle = -1
-    time.sleep(0.25)
-    kit.continuous_servo[12].throttle = -0.1
-        
-    return()
-
-def SmallInitServos():
-    print("\n--> Initialize Servos")
-    from adafruit_motorkit import MotorKit
-    #Initialise the first hat on the default address
-        #i2c = busio.I2C(board.SCL, board.SDA)
-    kit = MotorKit()
-        #kit1 = MotorKit(address=0x64)
-        #kit1 == adafruit_pca9685.PCA9685(i2c)
-        #kit1 = ServoKit(channels=16)
-        
-    for i in range(300):
-        kit.stepper1.onestep()
-        time.sleep(0.01)
-        
-    return()
-
-def TestServos():
-    print("\n--> Test Servos")
-    # Test ServoKit
-        
-        # Test Standard Servo
-        #kit.servo[0].angle = 180
-        #kit.servo[0].angle = 0
-        
-        # Test Continuous Servo
-        #kit.continuous_servo[1].throttle = 1
-        #time.sleep(1)
-        #kit.continuous_servo[1].throttle = -1
-        #time.sleep(1)
-        #kit.continuous_servo[1].throttle = 0
-    return()
 
 def get_api_key():
     print("\n--> Set API Key : Weather")
@@ -247,7 +137,7 @@ def GetTime():
 
 
 def main():
-    print("\n--> Run Starting v37")
+    print("\n--> Run Starting v40")
     
     #    if len(sys.argv) != 2:
         #        exit("Usage: {} LOCATION".format(sys.argv[0]))
@@ -261,18 +151,18 @@ def main():
     
     #SmallInitServos() #Initialize Servo Controller
     #InitServos() #Initialize Servo Controller
-        #TestServos() #Reset Servos
+    #TestServos() #Reset Servos
         
-        #    InitWeather() #Fetch Current Weather
-        #
-        #    GetTime()
-        #
-        #    #Let's get to work!
-        #    SetSun()
-        #    SetMoon()
-        #    SetClouds()
-        #    SetTemp()
-        #    FlyPig()
+    InitWeather() #Fetch Current Weather
+    #
+    GetTime()
+    
+    #Let's get to work!
+    SetSun()
+    SetMoon()
+    SetClouds()
+    SetTemp()
+    FlyPig()
         
     print("\n--> Run Complete")
 
