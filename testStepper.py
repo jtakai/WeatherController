@@ -26,30 +26,40 @@ def InitSteppers2():
     
     counter0 = 0
     counter1 = 0
-    
+    counter2 = 0
+
     print("counter0 = ", counter0)
     print("counter1 = ", counter1)
-    
+    print("counter2 = ", counter2)
+
     for i in range(100):
         kit.stepper1.onestep(direction=stepper.FORWARD, style=stepper.DOUBLE)
         kit1.stepper1.onestep(direction=stepper.BACKWARD, style=stepper.DOUBLE)
+        kit1.stepper2.onestep(direction=stepper.FORWARD, style=stepper.DOUBLE)
+
         time.sleep(0.01)
         counter0 = counter0 + 1
         counter1 = counter1 - 1
-    
+        counter2 = counter2 + 1
+
     print("counter0 = ", counter0)
     print("counter1 = ", counter1)
-    
+    print("counter2 = ", counter2)
+
     for i in range(100):
         kit.stepper1.onestep(direction=stepper.FORWARD, style=stepper.SINGLE)
         kit1.stepper1.onestep(direction=stepper.BACKWARD, style=stepper.SINGLE)
+        kit1.stepper2.onestep(direction=stepper.FORWARD, style=stepper.SINGLE)
+
         time.sleep(0.01)
         counter0 = counter0 + 1
         counter1 = counter1 - 1
-    
+        counter2 = counter2 + 1
+
     print("counter0 = ", counter0)
     print("counter1 = ", counter1)
-    
+    print("counter2 = ", counter2)
+
     for i in range(100):
         kit.stepper1.onestep(direction=stepper.FORWARD, style=stepper.DOUBLE)
         time.sleep(0.01)
@@ -57,7 +67,8 @@ def InitSteppers2():
     
     print("counter0 = ", counter0)
     print("counter1 = ", counter1)
-    
+    print("counter2 = ", counter2)
+
     for i in range(100):
         kit1.stepper1.onestep(direction=stepper.BACKWARD, style=stepper.DOUBLE)
         time.sleep(0.01)
@@ -65,11 +76,22 @@ def InitSteppers2():
     
     print("counter0 = ", counter0)
     print("counter1 = ", counter1)
+    print("counter2 = ", counter2)
+
+    for i in range(100):
+        kit1.stepper2.onestep(direction=stepper.FORWARD, style=stepper.DOUBLE)
+        time.sleep(0.01)
+        counter2 = counter2 + 1
     
+    print("counter0 = ", counter0)
+    print("counter1 = ", counter1)
+    print("counter2 = ", counter2)
+
     print("---> NOW RESET STEPPERS ---<")
 
     print("counter0 = ", counter0)
     print("counter1 = ", counter1)
+    print("counter2 = ", counter2)
 
     for i in range(counter0):
         kit.stepper1.onestep(direction=stepper.BACKWARD, style=stepper.SINGLE)
@@ -78,19 +100,33 @@ def InitSteppers2():
         
     print("counter0 = ", counter0)
     print("counter1 = ", counter1)
+    print("counter2 = ", counter2)
 
     for i in range(-counter1):
         kit1.stepper1.onestep(direction=stepper.FORWARD, style=stepper.SINGLE)
         time.sleep(0.01)
         counter1 = counter1 + 1
+
+    print("counter0 = ", counter0)
+    print("counter1 = ", counter1)
+    print("counter2 = ", counter2)
+
+    for i in range(counter2):
+        kit1.stepper2.onestep(direction=stepper.BACKWARD, style=stepper.SINGLE)
+        time.sleep(0.01)
+        counter2 = counter2 - 1
+        
     print("---> STEPPERS ARE RESET ---<")
 
     print("counter0 = ", counter0)
     print("counter1 = ", counter1)
-    
+    print("counter2 = ", counter2)
+
+
     kit.stepper1.release()
     kit1.stepper1.release()
-    
+    kit1.stepper2.release()
+
     return()
     
 def main():
