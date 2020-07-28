@@ -31,5 +31,7 @@ for i in range(rotations):
 
     
 kit.stepper1.release()
+kit.stepper2.release()
 kit1.stepper1.release()
+kit1.stepper2.release()
 
