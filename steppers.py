@@ -15,6 +15,9 @@ def MoveStepperFlyPig():
     for i in range(dist):
         kit1.stepper1.onestep(direction=stepper.BACKWARD, style=stepper.DOUBLE)
         time.sleep(constant.MOTOR_SPEED)
+        
+    time.sleep(0.5)
+
     for i in range(dist):
         kit1.stepper1.onestep(direction=stepper.FORWARD, style=stepper.DOUBLE)
         time.sleep(constant.MOTOR_SPEED)
@@ -66,21 +69,21 @@ def ReleaseSteppers():
 
 def ClearSteppers():
     print("\n--> Initialize Steppers")
-        
-    for i in range(constant.ARM_MAX_RANGE):
-        kit.stepper1.onestep(direction=stepper.FORWARD, style=stepper.DOUBLE)
-        kit.stepper2.onestep(direction=stepper.FORWARD, style=stepper.DOUBLE)
-        kit1.stepper1.onestep(direction=stepper.FORWARD, style=stepper.DOUBLE)
-        kit1.stepper2.onestep(direction=stepper.FORWARD, style=stepper.DOUBLE)
-        time.sleep(0.01)
-
-    for i in range(constant.ARM_MAX_RANGE):
-        kit.stepper1.onestep(direction=stepper.BACKWARD, style=stepper.DOUBLE)
-        kit.stepper2.onestep(direction=stepper.BACKWARD, style=stepper.DOUBLE)
-        kit1.stepper1.onestep(direction=stepper.BACKWARD, style=stepper.DOUBLE)
-        kit1.stepper2.onestep(direction=stepper.BACKWARD, style=stepper.DOUBLE)
-        time.sleep(0.01)
-
+#        
+#    for i in range(constant.ARM_MAX_RANGE):
+#        kit.stepper1.onestep(direction=stepper.FORWARD, style=stepper.DOUBLE)
+#        kit.stepper2.onestep(direction=stepper.FORWARD, style=stepper.DOUBLE)
+#        kit1.stepper1.onestep(direction=stepper.FORWARD, style=stepper.DOUBLE)
+#        kit1.stepper2.onestep(direction=stepper.FORWARD, style=stepper.DOUBLE)
+#        time.sleep(0.01)
+#
+#    for i in range(constant.ARM_MAX_RANGE):
+#        kit.stepper1.onestep(direction=stepper.BACKWARD, style=stepper.DOUBLE)
+#        kit.stepper2.onestep(direction=stepper.BACKWARD, style=stepper.DOUBLE)
+#        kit1.stepper1.onestep(direction=stepper.BACKWARD, style=stepper.DOUBLE)
+#        kit1.stepper2.onestep(direction=stepper.BACKWARD, style=stepper.DOUBLE)
+#        time.sleep(0.01)
+#
     state = ReleaseSteppers()
     
     if state == constant.FALSE:

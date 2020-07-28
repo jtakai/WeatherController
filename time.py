@@ -160,10 +160,10 @@ def main():
     #    location = sys.argv[1]
     #    asyncio.run(InitMusic())
         
-    InitMusic()
-    time.sleep(10) #Wait until the chain/ratchet sound plays before launching the motors
+    #InitMusic()
+    #time.sleep(10) #Wait until the chain/ratchet sound plays before launching the motors
 
-    #ClearSteppers() #Initialize Stepper Controller
+    ClearSteppers() #Initialize Stepper Controller
     #SmallInitServos() #Initialize Servo Controller
     #InitServos() #Initialize Servo Controller
     #TestServos() #Reset Servos
