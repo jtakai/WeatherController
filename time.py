@@ -26,7 +26,7 @@ def InitMusic():
 #    while pygame.mixer.music.get_busy() == True:
 #        continue
     print("\n--> Playing Music")
-    os.system("play /home/pi/WeatherController/Carnival3.wav &")
+    os.system("play /home/pi/WeatherController/Carnival5short.wav &")
 
 def get_api_key():
     print("\n--> Set API Key : Weather")
@@ -154,14 +154,14 @@ def FlyPig():
 
 
 def main():
-    print("\n--> Run Starting v42")
+    print("\n--> Run Starting v43")
     #    if len(sys.argv) != 2:
     #        exit("Usage: {} LOCATION".format(sys.argv[0]))
     #    location = sys.argv[1]
     #    asyncio.run(InitMusic())
         
     InitMusic()
-    time.sleep(8)
+    time.sleep(10) #Wait until the chain/ratchet sound plays before launching the motors
 
     #ClearSteppers() #Initialize Stepper Controller
     #SmallInitServos() #Initialize Servo Controller
@@ -171,8 +171,13 @@ def main():
     
     #Let's get to work!
     SetSun()
+    time.sleep(1)
     SetTemp()
+    time.sleep(1)
+
     SetClouds()
+    time.sleep(1)
+
     FlyPig()
     
     #SetMoon()

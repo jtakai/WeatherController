@@ -14,10 +14,10 @@ def MoveStepperFlyPig():
     dist = 100 * constant.TIME_MULTIPLIER
     for i in range(dist):
         kit1.stepper1.onestep(direction=stepper.BACKWARD, style=stepper.DOUBLE)
-        time.sleep(0.05)
+        time.sleep(constant.MOTOR_SPEED)
     for i in range(dist):
         kit1.stepper1.onestep(direction=stepper.FORWARD, style=stepper.DOUBLE)
-        time.sleep(0.05)
+        time.sleep(constant.MOTOR_SPEED)
         
     state = ReleaseSteppers()
     return()
@@ -27,7 +27,7 @@ def MoveStepperSun(measurement):
     dist = measurement * constant.TIME_MULTIPLIER
     for i in range(dist):
         kit.stepper1.onestep(direction=stepper.BACKWARD, style=stepper.DOUBLE)
-        time.sleep(0.01)
+        time.sleep(constant.MOTOR_SPEED)
     state = ReleaseSteppers()
     return()
 
@@ -36,7 +36,7 @@ def MoveStepperCloud(measurement):
     dist = measurement * constant.TIME_MULTIPLIER
     for i in range(dist):
         kit1.stepper2.onestep(direction=stepper.BACKWARD, style=stepper.DOUBLE)
-        time.sleep(0.01)
+        time.sleep(constant.MOTOR_SPEED)
     state = ReleaseSteppers()
     return()
 
@@ -46,7 +46,7 @@ def MoveStepperTemp(measurement):
 
     for i in range(dist):
         kit.stepper2.onestep(direction=stepper.BACKWARD, style=stepper.DOUBLE)
-        time.sleep(0.01)
+        time.sleep(constant.MOTOR_SPEED)
     state = ReleaseSteppers()
     return()
 
