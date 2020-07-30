@@ -106,6 +106,7 @@ def SetSun( currSunPos ):
 def SetTemp():
     print("\n--> Setting Position : Temp")
     #TASK: Need to solve Positional math for StraightLine position
+    weather = get_weather(api_key, location)
     #############################################
     # Pull Temp <range> for Arm
     # This calculates full range of 100% arm travel based on current temp + full range defined
@@ -134,6 +135,7 @@ def SetClouds():
     #TASK: Need to solve Positional math for arc position relative to Sun (time-of-day)
 #    print("\n--> Setting Position : Sun")
     #TASK: Need to solve Positional math for arc position relative to Time (time-of-day)
+    weather = get_weather(api_key, location)
     #############################################
     # Pull Sun Travel <range> for Arm
     # This calculates full range of 100% arm travel based on day's sun exposure
@@ -172,9 +174,8 @@ def FlyPig():
     #TASK: Need to solve trigger for flight and return timing
     return()
 
-
 def main():
-    print("\n--> Run Starting v43")
+    print("\n--> Run Starting v44")
     #    if len(sys.argv) != 2:
     #        exit("Usage: {} LOCATION".format(sys.argv[0]))
     #    location = sys.argv[1]
@@ -194,21 +195,21 @@ def main():
 
     while (1):
         #Let's get to work!
- #       print(" Calling SetSun with : ", z)
+        print(" Calling SetSun with : ", z)
 
         z = SetSun(currentSunPosition)
         currentSunPosition = z
-#        print(" Correct Sun Position : ", currentSunPosition)
-#        time.sleep(1)
-#        SetTemp()
-#        time.sleep(1)
-#        SetClouds()
-#        time.sleep(1)
-#        FlyPig()
-#        #SetMoon()
-#        counter = counter + 1
-#        print("Run number ",counter)
- #       print("\n--> Run Complete")
+        print(" Correct Sun Position : ", currentSunPosition)
+        time.sleep(1)
+        SetTemp()
+        time.sleep(1)
+        SetClouds()
+        time.sleep(1)
+        FlyPig()
+        #SetMoon()
+        counter = counter + 1
+        print("Run number ",counter)
+        print("\n--> Run Complete")
         time.sleep(60)
 
 
