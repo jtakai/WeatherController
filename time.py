@@ -58,7 +58,7 @@ def SetSun( currSunPos ):
 #    print("\n--> Setting Position : Sun")
 #    print(" Incoming Correct Sun Position : ", currSunPos)
     weather = get_weather(api_key, location)
-    print(weather['dt'])
+#    print(weather['dt'])
 #    print("** <",weather, ">")
 
     #TASK: Need to solve Positional math for arc position relative to Time (time-of-day)
@@ -71,26 +71,28 @@ def SetSun( currSunPos ):
     #print("** Sunrise <",weather['sys']['sunrise'], ">")
     #print("** Sunset <",weather['sys']['sunset'], ">")
     timeDiff = weather['sys']['sunset'] - weather['sys']['sunrise']
-    print("** timeDiff <",timeDiff,">")
+#    print("** timeDiff <",timeDiff,">")
     #range = timeDiff / 3600.0
     #print("** range <",range,">")
     rawTime = weather['dt']
     rawTime = time.time()
-    print("** Time <",rawTime, ">")
+#    print("** Time <",rawTime, ">")
     xTime = rawTime - weather['sys']['sunrise']
-    print("** xTime <",xTime, ">")
+#    print("** xTime <",xTime, ">")
     # where are we in the percentage of the day?
     percentTime = ( xTime / timeDiff )
-    print("** percentTime <",percentTime * 100, ">")
+#    print("** percentTime <",percentTime * 100, ">")
     #correctPosition establishes the range position between 0->[maxRange]] degrees
     maxRange = constant.ARM_MAX_RANGE # currently set to 180 degrees
-    print("** maxRange <",maxRange, ">")
+#    print("** maxRange <",maxRange, ">")
     x = int(percentTime * maxRange - currSunPos)
     y = int(percentTime * maxRange)
-    print("** differential moving ---> ", x, " units")
+#    print("** differential moving ---> ", x, " units")
     if x > 0:
         print("####################################################")
-        
+    else:
+        print("#")
+
     MoveStepperSun(x)
     # lTime = localtime()
     # print("** localtime <",lTime, ">")
@@ -128,9 +130,9 @@ def SetMoon():
     return()
 
 def SetClouds():
-    print("\n--> Setting Position : Clouds")
+#    print("\n--> Setting Position : Clouds")
     #TASK: Need to solve Positional math for arc position relative to Sun (time-of-day)
-    print("\n--> Setting Position : Sun")
+#    print("\n--> Setting Position : Sun")
     #TASK: Need to solve Positional math for arc position relative to Time (time-of-day)
     #############################################
     # Pull Sun Travel <range> for Arm
@@ -154,7 +156,7 @@ def SetClouds():
     #correctPosition establishes the range position between 0->[maxRange]] degrees
     maxRange = constant.ARM_MAX_RANGE # currently set to 180 degrees
     correctPosition = int(percentTime * maxRange)
-    print("** correctPosition <",correctPosition, " units>")
+#    print("** correctPosition <",correctPosition, " units>")
     MoveStepperCloud(correctPosition)
     # lTime = localtime()
     # print("** localtime <",lTime, ">")
@@ -196,7 +198,7 @@ def main():
 
         z = SetSun(currentSunPosition)
         currentSunPosition = z
-        print(" Correct Sun Position : ", currentSunPosition)
+#        print(" Correct Sun Position : ", currentSunPosition)
 #        time.sleep(1)
 #        SetTemp()
 #        time.sleep(1)
@@ -204,10 +206,10 @@ def main():
 #        time.sleep(1)
 #        FlyPig()
 #        #SetMoon()
-        counter = counter + 1
-        print("Run number ",counter)
+#        counter = counter + 1
+#        print("Run number ",counter)
  #       print("\n--> Run Complete")
-        time.sleep(5)
+        time.sleep(60)
 
 
 if __name__ == '__main__':
