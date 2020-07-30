@@ -13,9 +13,10 @@ from steppers import MoveStepperSun
 from steppers import MoveStepperCloud
 from steppers import MoveStepperTemp
 from steppers import MoveStepperFlyPig
+from datetime import datetime
+from datetime import date
 
 from servos import InitServos
-from datetime import datetime
 from gettime import GetTime
 
 def InitMusic():
@@ -29,28 +30,37 @@ def InitMusic():
     os.system("play /home/pi/WeatherController/Carnival5short.wav &")
 
 def get_api_key():
-    print("\n--> Set API Key : Weather")
+#    print("\n--> Set API Key : Weather")
     config = configparser.ConfigParser()
     config.read('config.ini')
     return config['openweathermap']['api']
 
 def get_weather(api_key, location):
-    print("\n--> Gathering Data : Weather")
+#    print("\n--> Gathering Data : Weather")
     url = "https://api.openweathermap.org/data/2.5/weather?q={}&units=imperial&appid={}".format(location, api_key)
     r = requests.get(url)
     return r.json()
 
+currentSunPosition = 0
+#print("** correctPosition <",currentSunPosition, " units>")
+
 #Get the API Key for openweathermap.org
 api_key = get_api_key()
 location = constant.CITY
-#print("\n--> Initialize and Read Current Weather")
 # Full Weather Data Structure
 #print("** <",weather, ">")
 #TASK: Need to return intelligent/formatted weather data for position modules
-weather = get_weather(api_key, location)
-    
-def SetSun():
-    print("\n--> Setting Position : Sun")
+#weather = get_weather(api_key, location)
+#print("\n--> Initialize and Read Current Weather")
+#print(weather['dt'])
+
+def SetSun( currSunPos ):
+#    print("\n--> Setting Position : Sun")
+#    print(" Incoming Correct Sun Position : ", currSunPos)
+    weather = get_weather(api_key, location)
+    print(weather['dt'])
+#    print("** <",weather, ">")
+
     #TASK: Need to solve Positional math for arc position relative to Time (time-of-day)
     #############################################
     # Pull Sun Travel <range> for Arm
@@ -61,27 +71,35 @@ def SetSun():
     #print("** Sunrise <",weather['sys']['sunrise'], ">")
     #print("** Sunset <",weather['sys']['sunset'], ">")
     timeDiff = weather['sys']['sunset'] - weather['sys']['sunrise']
-    #print("** timeDiff <",timeDiff,">")
+    print("** timeDiff <",timeDiff,">")
     #range = timeDiff / 3600.0
     #print("** range <",range,">")
     rawTime = weather['dt']
-    #print("** Time <",rawTime, ">")
+    rawTime = time.time()
+    print("** Time <",rawTime, ">")
     xTime = rawTime - weather['sys']['sunrise']
-    #print("** xTime <",xTime, ">")
+    print("** xTime <",xTime, ">")
     # where are we in the percentage of the day?
     percentTime = ( xTime / timeDiff )
-    #print("** percentTime <",percentTime, ">")
+    print("** percentTime <",percentTime * 100, ">")
     #correctPosition establishes the range position between 0->[maxRange]] degrees
     maxRange = constant.ARM_MAX_RANGE # currently set to 180 degrees
-    correctPosition = int(percentTime * maxRange)
-    print("** correctPosition <",correctPosition, " units>")
-    MoveStepperSun(correctPosition)
+    print("** maxRange <",maxRange, ">")
+    x = int(percentTime * maxRange - currSunPos)
+    y = int(percentTime * maxRange)
+    print("** differential moving ---> ", x, " units")
+    if x > 0:
+        print("####################################################")
+        
+    MoveStepperSun(x)
     # lTime = localtime()
     # print("** localtime <",lTime, ">")
     # s = time.gmtime(0)
     # print("** Timezone <",s, ">")
     #############################################
-    return()
+#    print(" Returning : ", y)
+
+    return y
 
 def SetTemp():
     print("\n--> Setting Position : Temp")
@@ -168,23 +186,30 @@ def main():
     #InitServos() #Initialize Servo Controller
     #TestServos() #Reset Servos
     #GetTime() #Get Systime
-    
-    #Let's get to work!
-    SetSun()
-    time.sleep(1)
-    SetTemp()
-    time.sleep(1)
+    counter = 0
+    z = 0
+    currentSunPosition = 0
 
-    SetClouds()
-    time.sleep(1)
+    while (1):
+        #Let's get to work!
+ #       print(" Calling SetSun with : ", z)
 
-    FlyPig()
-    
-    #SetMoon()
+        z = SetSun(currentSunPosition)
+        currentSunPosition = z
+        print(" Correct Sun Position : ", currentSunPosition)
+#        time.sleep(1)
+#        SetTemp()
+#        time.sleep(1)
+#        SetClouds()
+#        time.sleep(1)
+#        FlyPig()
+#        #SetMoon()
+        counter = counter + 1
+        print("Run number ",counter)
+ #       print("\n--> Run Complete")
+        time.sleep(5)
 
-    print("\n--> Run Complete")
 
 if __name__ == '__main__':
     main()
-
 

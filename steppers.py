@@ -26,7 +26,7 @@ def MoveStepperFlyPig():
     return()
 
 def MoveStepperSun(measurement):
-    print("\n--> Move Stepper Time")
+#    print("\n--> Move Stepper Time")
     dist = measurement * constant.TIME_MULTIPLIER
     for i in range(dist):
         kit.stepper1.onestep(direction=stepper.BACKWARD, style=stepper.DOUBLE)
@@ -44,7 +44,7 @@ def MoveStepperCloud(measurement):
     return()
 
 def MoveStepperTemp(measurement):
-    print("\n--> Move Stepper: Temperature")
+#    print("\n--> Move Stepper: Temperature")
     dist = measurement * constant.TEMP_MULTIPLIER
 
     for i in range(dist):
@@ -68,7 +68,7 @@ def ReleaseSteppers():
 
 
 def ClearSteppers():
-    print("\n--> Initialize Steppers")
+#    print("\n--> Initialize Steppers")
 #        
 #    for i in range(constant.ARM_MAX_RANGE):
 #        kit.stepper1.onestep(direction=stepper.FORWARD, style=stepper.DOUBLE)
@@ -86,10 +86,10 @@ def ClearSteppers():
 #
     state = ReleaseSteppers()
     
-    if state == constant.FALSE:
-        print("Stepper Release Failed")
-    else:
-        print("Stepper Release Success")
+##    if state == constant.FALSE:
+#        print("Stepper Release Failed")
+#    else:
+#        print("Stepper Release Success")
     
     return()
     
