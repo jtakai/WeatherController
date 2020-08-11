@@ -8,7 +8,6 @@ from adafruit_motor import stepper
 kit = MotorKit()
 kit1 = MotorKit(address=0x61)
 
-
 def MoveStepperFlyPig():
     print("\n--> Flying Pig")
     dist = 100 * constant.TIME_MULTIPLIER
