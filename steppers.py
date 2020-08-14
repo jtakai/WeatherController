@@ -10,7 +10,7 @@ kit1 = MotorKit(address=0x61)
 
 def MoveStepperFlyPig():
     print("\n--> Flying Pig")
-    dist = 100 * constant.TIME_MULTIPLIER
+    dist = 50 * constant.TIME_MULTIPLIER
     for i in range(dist):
         kit1.stepper1.onestep(direction=stepper.BACKWARD, style=stepper.DOUBLE)
         time.sleep(constant.MOTOR_SPEED)

@@ -1,8 +1,5 @@
 # soundplayer.py
 
-import thread
-import os
-
 class SoundPlayer:
     '''
     Sound player based on SoX, called "the Swiss Army knife of sound processing programs" by its developper.
