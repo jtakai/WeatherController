@@ -1,5 +1,6 @@
 from datetime import datetime
 
+
 def GetTime():
     print("\n--> Gathering Data : GetTime")
     now = datetime.now()

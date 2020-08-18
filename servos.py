@@ -1,5 +1,6 @@
 from adafruit_servokit import ServoKit
 
+
 def InitServos():
     print("\n--> Initialize Servos")
     from adafruit_servokit import ServoKit
