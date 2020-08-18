@@ -18,21 +18,7 @@ from datetime import date
 
 from servos import InitServos
 from gettime import GetTime
-
-def InitMusic():
-#    subprocess.Popen("play /home/pi/WeatherController/Carnival3.wav")
-#    pygame.mixer.init()
-#    pygame.mixer.music.load("Carnival3.wav")
-#    pygame.mixer.music.play()
-#    while pygame.mixer.music.get_busy() == True:
-#        continue
-    print("\n--> Playing Music")
-
-#    play music track using USB Audio board
-    
-    os.system("aplay --device=plughw:3,0 /home/pi/WeatherController/Carnival5short.wav &")
-#    os.system("play /home/pi/WeatherController/Carnival5short.wav &")
-
+from music import InitMusic
 
 def get_api_key():
 #    print("\n--> Set API Key : Weather")
@@ -180,14 +166,14 @@ def FlyPig():
     return()
 
 def main():
-    print("\n--> Run Starting v46")
+    print("\n--> Run Starting v47")
     #    if len(sys.argv) != 2:
     #        exit("Usage: {} LOCATION".format(sys.argv[0]))
     #    location = sys.argv[1]
     #    asyncio.run(InitMusic())
         
-    #InitMusic()
-    #time.sleep(10) #Wait until the chain/ratchet sound plays before launching the motors
+    InitMusic()
+    time.sleep(10) #Wait until the chain/ratchet sound plays before launching the motors
 
     ClearSteppers() #Initialize Stepper Controller
     #SmallInitServos() #Initialize Servo Controller

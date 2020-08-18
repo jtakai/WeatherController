@@ -5,6 +5,9 @@
       location = "group:time.py">
    </FileRef>
    <FileRef
+      location = "group:music.py">
+   </FileRef>
+   <FileRef
       location = "group:gettime.py">
    </FileRef>
    <FileRef
