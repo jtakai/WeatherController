@@ -2,10 +2,34 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:testdcb.py">
+   </FileRef>
+   <FileRef
+      location = "group:testdcf.py">
+   </FileRef>
+   <FileRef
       location = "group:time.py">
    </FileRef>
    <FileRef
+      location = "group:testpig.py">
+   </FileRef>
+   <FileRef
+      location = "group:/Volumes/pi&apos;s home/WeatherController/testdoorOPEN.py">
+   </FileRef>
+   <FileRef
+      location = "group:testdoorCLOSE.py">
+   </FileRef>
+   <FileRef
+      location = "group:testbck.py">
+   </FileRef>
+   <FileRef
+      location = "group:testfwd.py">
+   </FileRef>
+   <FileRef
       location = "group:music.py">
+   </FileRef>
+   <FileRef
+      location = "group:ipanema.py">
    </FileRef>
    <FileRef
       location = "group:gettime.py">

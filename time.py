@@ -13,6 +13,8 @@ from steppers import MoveStepperSun
 from steppers import MoveStepperCloud
 from steppers import MoveStepperTemp
 from steppers import MoveStepperFlyPig
+from steppers import MoveStepperFlyPigFALSE1
+from steppers import MoveStepperFlyPigFALSE2
 from datetime import datetime
 from datetime import date
 
@@ -21,19 +23,19 @@ from gettime import GetTime
 from music import InitMusic
 
 def get_api_key():
-#    print("\n--> Set API Key : Weather")
+    print("\n--> Set API Key : Weather")
     config = configparser.ConfigParser()
     config.read('config.ini')
     return config['openweathermap']['api']
 
 def get_weather(api_key, location):
-#    print("\n--> Gathering Data : Weather")
+    print("\n--> Gathering Data : Weather")
     url = "https://api.openweathermap.org/data/2.5/weather?q={}&units=imperial&appid={}".format(location, api_key)
     r = requests.get(url)
     return r.json()
 
 currentSunPosition = 0
-#print("** correctPosition <",currentSunPosition, " units>")
+print("** correctPosition <",currentSunPosition, " units>")
 
 #Get the API Key for openweathermap.org
 api_key = get_api_key()
@@ -41,14 +43,14 @@ location = constant.CITY
 # Full Weather Data Structure
 #print("** <",weather, ">")
 #TASK: Need to return intelligent/formatted weather data for position modules
-#weather = get_weather(api_key, location)
-#print("\n--> Initialize and Read Current Weather")
-#print(weather['dt'])
+weather = get_weather(api_key, location)
+print("\n--> Initialize and Read Current Weather")
+print(weather['dt'])
 
 def SetSun( currSunPos ):
 #    print("\n--> Setting Position : Sun")
 #    print(" Incoming Correct Sun Position : ", currSunPos)
-    weather = get_weather(api_key, location)
+#    weather = get_weather(api_key, location)
 #    print(weather['dt'])
 #    print("** <",weather, ">")
 
@@ -91,7 +93,6 @@ def SetSun( currSunPos ):
     # print("** Timezone <",s, ">")
     #############################################
 #    print(" Returning : ", y)
-
     return y
 
 def SetTemp():
@@ -160,21 +161,26 @@ def SetClouds():
 
 def FlyPig():
     print("\n--> Flying the Pig!")
-    MoveStepperFlyPig()
+   # MoveStepperFlyPig()
+    MoveStepperFlyPigFALSE1()
+    # MoveStepperFlyPigFALSE2()
     #TASK: Need to solve Positional math for flight arc start/end/return/start
     #TASK: Need to solve trigger for flight and return timing
     return()
 
+####################################################
+#########    MAIN ROUTINE CONTROLLER     ###########
+####################################################
 
 def main():
-    print("\n--> Run Starting v48")
+    print("\n--> Run Starting v50")
     #    if len(sys.argv) != 2:
     #        exit("Usage: {} LOCATION".format(sys.argv[0]))
     #    location = sys.argv[1]
     #    asyncio.run(InitMusic())
         
-    #InitMusic()
-    #time.sleep(10) #Wait until the chain/ratchet sound plays before launching the motors
+#    InitMusic()
+#    time.sleep(10) #Wait until the chain/ratchet sound plays before launching the motors
 
     ClearSteppers() #Initialize Stepper Controller
     #SmallInitServos() #Initialize Servo Controller
@@ -187,33 +193,34 @@ def main():
 
     while (1):
         #Let's get to work!
-        print(" Calling SetSun with : ", z)
 
 # Stepper 1
-        z = SetSun(currentSunPosition)
-        currentSunPosition = z
-        print(" Correct Sun Position : ", currentSunPosition)
-        time.sleep(1)
+#        print(" Calling SetSun with : ", z)
+#        z = SetSun(currentSunPosition)
+#        currentSunPosition = z
+#        print(" Correct Sun Position : ", currentSunPosition)
+#        time.sleep(1)
 
 # Stepper 2
-        SetTemp()
-        time.sleep(1)
+#        SetTemp()
+#        time.sleep(1)
         
 # Stepper 3
-        SetClouds()
-        time.sleep(1)
+#        SetClouds()
+#        time.sleep(1)
 
 # Stepper 4
         FlyPig()
-        
+        time.sleep(1)
+
         
         #SetMoon()
         counter = counter + 1
         print("Run number ",counter)
         print("\n--> Run Complete")
-        time.sleep(60 * 5)
-
+#        time.sleep(60 * 5)
 
 if __name__ == '__main__':
     main()
 
+    

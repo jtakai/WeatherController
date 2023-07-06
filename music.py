@@ -20,8 +20,8 @@ def InitMusic():
 
 #    play music track using USB Audio board
     
-#    os.system("aplay --device=plughw:2,0 /home/pi/WeatherController/Carnival5short.wav &")
-    os.system("aplay --device=plughw:2,0 /home/pi/WeatherController/fox.wav &")
+    os.system("aplay --device=plughw:2,0 /home/pi/WeatherController/Carnival5short.wav &")
+#    os.system("aplay --device=plughw:2,0 /home/pi/WeatherController/fox.wav &")
 #    os.system("play /home/pi/WeatherController/Carnival5short.wav &")
 
 
