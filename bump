@@ -1,4 +1,0 @@
-#!/bin/bash
-#
-#
-python /home/pi/WeatherController/bump.py 300
